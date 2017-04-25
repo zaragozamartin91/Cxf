@@ -1,0 +1,19 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd">
+	<import resource="classpath:META-INF/cxf/cxf.xml" />
+	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
+
+	<!-- ESTE ES UN ARCHIVO DE CONFIGURACION DE SPRING. SIRVE PARA INDICAR EL 
+		BEAN QUE REPRESENTA EL SERVICIO WEB -->
+	<jaxws:endpoint id="bookrepo" implementor="mz.ex.ws.BookRepoImpl"
+		address="/BookRepo" wsdlLocation="/WEB-INF/wsdl/BookRepoImpl.wsdl">
+
+		<jaxws:properties>
+			<entry key="ws-security.callback-handler" value-ref="myPasswordCallback" />
+		</jaxws:properties>
+
+	</jaxws:endpoint>
+
+	<bean id="myPasswordCallback" class="service.ServerPasswordCallback" />
+</beans>
