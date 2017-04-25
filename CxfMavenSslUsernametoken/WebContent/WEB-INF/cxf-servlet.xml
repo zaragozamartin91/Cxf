@@ -6,8 +6,8 @@
 
 	<!-- ESTE ES UN ARCHIVO DE CONFIGURACION DE SPRING. SIRVE PARA INDICAR EL 
 		BEAN QUE REPRESENTA EL SERVICIO WEB -->
-	<jaxws:endpoint id="bookrepo" implementor="mz.ex.ws.BookRepoImpl"
-		address="/BookRepo" wsdlLocation="/WEB-INF/wsdl/BookRepoImpl.wsdl">
+	<jaxws:endpoint id="bookrepo" implementor="mz.ex.ws.BookRepoPortTypeImpl"
+		address="/BookRepo" wsdlLocation="/WEB-INF/wsdl/BookRepoPortTypeImpl.wsdl">
 
 		<jaxws:properties>
 			<entry key="ws-security.callback-handler" value-ref="myPasswordCallback" />
