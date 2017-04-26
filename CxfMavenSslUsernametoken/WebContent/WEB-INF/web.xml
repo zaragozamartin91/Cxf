@@ -29,6 +29,8 @@
 		<session-timeout>60</session-timeout>
 	</session-config>
 
+	<!-- ESTE FRAGMENTO DETERMINA QUE EL SERVICIO DEBE UTILIZAR SSL PARA LAS 
+		COMUNICACIONES -->
 	<security-constraint>
 		<web-resource-collection>
 			<web-resource-name>restricted web services</web-resource-name>
