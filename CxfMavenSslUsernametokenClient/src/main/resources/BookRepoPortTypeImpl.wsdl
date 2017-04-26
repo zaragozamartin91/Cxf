@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="BookRepoService"
+	targetNamespace="http://ws.ex.mz/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:tns="http://ws.ex.mz/" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"
+	xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata"
+	xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
+	<wsdl:types>
+		<xs:schema xmlns:tns="http://ws.ex.mz/" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+			elementFormDefault="unqualified" targetNamespace="http://ws.ex.mz/"
+			version="1.0">
+
+			<xs:element name="getBook" type="tns:getBook" />
+
+			<xs:element name="getBookResponse" type="tns:getBookResponse" />
+
+			<xs:complexType name="getBook">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="bookRequest" type="tns:bookRequest" />
+				</xs:sequence>
+			</xs:complexType>
+
+			<xs:complexType name="bookRequest">
+				<xs:sequence>
+					<xs:element name="isbn" type="xs:long" />
+				</xs:sequence>
+			</xs:complexType>
+
+			<xs:complexType name="getBookResponse">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="book" type="tns:bookResponse" />
+				</xs:sequence>
+			</xs:complexType>
+
+			<xs:complexType name="bookResponse">
+				<xs:sequence>
+					<xs:element name="isbn" type="xs:long" />
+					<xs:element minOccurs="0" name="name" type="xs:string" />
+				</xs:sequence>
+			</xs:complexType>
+
+		</xs:schema>
+	</wsdl:types>
+	
+	<wsdl:message name="getBook">
+		<wsdl:part name="parameters" element="tns:getBook">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getBookResponse">
+		<wsdl:part name="parameters" element="tns:getBookResponse">
+		</wsdl:part>
+	</wsdl:message>
+	
+	<wsdl:portType name="BookRepoPortTypeImpl">
+		<wsdl:operation name="getBook">
+			<wsdl:input name="getBook" message="tns:getBook">
+			</wsdl:input>
+			<wsdl:output name="getBookResponse" message="tns:getBookResponse">
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:portType>
+
+	<wsdl:binding name="BookRepoServiceSoapBinding" type="tns:BookRepoPortTypeImpl">
+		<wsp:PolicyReference URI="#BookRepoBindingPolicy" />
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="getBook">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="getBook">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="getBookResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	
+	<wsdl:service name="BookRepoService">
+		<wsdl:port name="BookRepoPort" binding="tns:BookRepoServiceSoapBinding">
+			<soap:address location="https://localhost:8443/CxfMavenSslUsernametoken-0.0.1/services/BookRepo" />
+		</wsdl:port>
+	</wsdl:service>
+
+
+	<wsp:Policy wsu:Id="BookRepoBindingPolicy">
+		<wsp:ExactlyOne>
+			<wsp:All>
+				<wsam:Addressing />
+				<sp:TransportBinding>
+					<wsp:Policy>
+						<sp:TransportToken>
+							<wsp:Policy>
+								<sp:HttpsToken RequireClientCertificate="false">
+									<wsp:Policy />
+								</sp:HttpsToken>
+							</wsp:Policy>
+						</sp:TransportToken>
+						<sp:Layout>
+							<wsp:Policy>
+								<sp:Lax />
+							</wsp:Policy>
+						</sp:Layout>
+						<sp:IncludeTimestamp />
+						<sp:AlgorithmSuite>
+							<wsp:Policy>
+								<sp:Basic256 />
+							</wsp:Policy>
+						</sp:AlgorithmSuite>
+					</wsp:Policy>
+				</sp:TransportBinding>
+				<sp:SignedEncryptedSupportingTokens>
+					<wsp:Policy>
+						<sp:UsernameToken
+							sp:IncludeToken="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702/IncludeToken/AlwaysToRecipient">
+							<wsp:Policy>
+								<sp:WssUsernameToken10 />
+							</wsp:Policy>
+						</sp:UsernameToken>
+					</wsp:Policy>
+				</sp:SignedEncryptedSupportingTokens>
+				<sp:Wss11 />
+			</wsp:All>
+		</wsp:ExactlyOne>
+	</wsp:Policy>
+</wsdl:definitions>
