@@ -4,10 +4,10 @@ import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebResult;
 import javax.jws.WebService;
-import javax.xml.ws.soap.Addressing;
 
 /* Con esta annotation es posible hacer que al invocar a un servicio, se agregue el Addressing en el Header del Soap */
-@Addressing
+//@Addressing
+
 @WebService(portName = "BookRepoPort", serviceName = "BookRepoService")
 public interface BookRepoPortType {
 	@WebMethod(operationName = "getBook")

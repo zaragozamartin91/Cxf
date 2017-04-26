@@ -2,6 +2,9 @@ SIGUIENDO ALGUNOS PASOS DE CONFIGURACION DE SSL DE: http://web-gmazza.rhcloud.co
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+NOTA: EL CLIENTE BookRepoClient NO FUNCIONA. SE UTILIZA MAYORITARIAMENTE PARA PROBAR LA POSIBLE CREACION DE UN CLIENTE MANUAL DE MENSAJES SOAP. TAMBIEN
+SE UTILIZA PARA LEER LOS MENSAJES ENVIADOS Y RESPONDIDOS POR EL SERVICIO. EJECUTAR EL MISMO PUEDE PROVOCAR EL LANZAMIENTO DE UNA EXCEPCION. 
+
 DEPOSITAR EL KEYSTORE cert/serverKeystore.jks EN $TOMCAT/conf/
 
 AGREGAR AL ARCHIVO $TOMCAT/conf/server.xml :
