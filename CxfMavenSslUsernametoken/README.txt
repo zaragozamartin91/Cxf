@@ -17,6 +17,16 @@ AGREGAR A $TOMCAT/conf/tomcat-users.xml :
 	<user username="bob"    password="trombone"  roles="mywsrole"/>
 	<user username="chuck"  password="harmonica" roles="mywsrole"/>
 
-CORRER mvn install Y DEPOSITAR EL war en $TOMCAT/webapps
+CORRER mvn install Y DEPOSITAR EL war en $TOMCAT/webapps (AL LEVANTAR TOMCAT, EL SERVER DEBERIA LEVANTAR AUTOMATICAMENTE LA WEBAPP).
 
-CORRER BookRepoClient PARA PROBAR EL SERVICIO.
+PARA DEBUGGEAR: 
+	LEVANTAR TOMCAT EN MODO DEBUG CORRIENDO "%TOMCAT_HOME%/bin/catalina.bat jpda start" (
+		SI OCURRE UN ERROR, CORRER LOS SIGUIENTES COMANDOS E INTENTAR NUEVAMENTE: 
+			"set JPDA_ADDRESS=8000"
+			"set JPDA_TRANSPORT=dt_socket").
+	DESDE ECLIPSE IR A DEBUG > DEBUG CONFIGURATIONS... > REMOTE JAVA APPLICATION > NEW.
+	ASIGNAR BREAKPOINTS EN EL PROYECTO SERVER.
+	CORRER ALGUN PROYECTO CLIENTE (COMO CxfMavenSslUsernametokenClient) EN MODO DEBUG.
+	
+
+
