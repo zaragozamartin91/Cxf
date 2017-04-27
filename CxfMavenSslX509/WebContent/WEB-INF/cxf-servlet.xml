@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xsi:schemaLocation="
+         http://www.springframework.org/schema/beans 
+         http://www.springframework.org/schema/beans/spring-beans.xsd
+         http://cxf.apache.org/jaxws
+         http://cxf.apache.org/schemas/jaxws.xsd">
+
+	<bean id="myPasswordCallback" class="service.ServiceKeystorePasswordCallback" />
+
+
+	<!-- ESTE ES UN ARCHIVO DE CONFIGURACION DE SPRING. SIRVE PARA INDICAR EL 
+		BEAN QUE REPRESENTA EL SERVICIO WEB -->
+	<jaxws:endpoint id="bookrepo" implementor="mz.ex.ws.BookRepoImpl"
+		address="/BookRepo" wsdlLocation="/WEB-INF/wsdl/BookRepoImpl.wsdl">
+
+		<jaxws:properties>
+			<entry key="ws-security.callback-handler">
+				<ref bean="myPasswordCallback" />
+			</entry>
+			<entry key="ws-security.encryption.properties" value="serviceKeystore.properties" />
+			<entry key="ws-security.signature.properties" value="serviceKeystore.properties" />
+			
+			<!-- Of special note is the useReqSigCert value for the encryptionUser parameter in the WSS4JOutInterceptor above. 
+			When this value is used instead of a specific client key alias, 
+			it tells the service to use the same key that was used to sign the SOAP request. 
+			This allows the service to handle any client whose public key is in the service's truststore. -->
+			<!-- "useReqSigCert" config property: It uses the client signing certificate to encrypt the response to the client. -->
+			<entry key="ws-security.encryption.username" value="useReqSigCert" />
+			
+		</jaxws:properties>
+
+
+	</jaxws:endpoint>
+</beans>
