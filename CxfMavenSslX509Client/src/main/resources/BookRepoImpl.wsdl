@@ -162,11 +162,13 @@
 	<wsp:Policy wsu:Id="BookRepoBinding_getBook_Output_Policy">
 		<wsp:ExactlyOne>
 			<wsp:All>
-				<sp:EncryptedParts>
-					<sp:Body />
-				</sp:EncryptedParts>
+				<!-- DESCOMENTAR PARA ENCRIPTAR EL CUERPO DEL MENSAJE EN LA RESPUESTA -->
+				<!-- <sp:EncryptedParts> -->
+				<!-- <sp:Body /> -->
+				<!-- </sp:EncryptedParts> -->
 				<sp:SignedParts>
-					<sp:Body />
+					<!-- DESCOMENTAR PARA FIRMAR EL CUERPO DEL MENSAJE EN LA RESPUESTA -->
+					<!-- <sp:Body /> -->
 					<sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
 					<sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
 					<sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />

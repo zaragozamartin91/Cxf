@@ -28,19 +28,6 @@ public class BookRepoClient {
 		System.setProperty("com.sun.xml.ws.transport.http.HttpAdapter.dump", "true");
 		System.setProperty("com.sun.xml.internal.ws.transport.http.HttpAdapter.dump", "true");
 
-		// QName serviceName = new QName("http://ws.ex.mz/", "BookRepoService");
-		// QName portName = new QName("http://ws.ex.mz/", "BookRepoPort");
-		// URL wsdlUrl = BookRepoPortType.class.getClassLoader().getResource("BookRepoPortTypeImpl.wsdl");
-		//
-		// Service service = Service.create(wsdlUrl, serviceName);
-		// service.addPort(portName, SOAPBinding.SOAP11HTTP_BINDING,
-		// "https://localhost:8443/CxfMavenSslUsernametoken-0.0.1/services/BookRepo");
-		// BookRepoPortType client = service.getPort(portName, BookRepoPortType.class);
-		//
-		// BookRequest bookRequest = new BookRequest();
-		// bookRequest.setIsbn(1234L);
-		// BookResponse bookResponse = client.getBook(bookRequest);
-		// System.out.printf("Got book %s:%s %n", bookResponse.getIsbn(), bookResponse.getName());
 
 		BookRepoService bookRepoService = new BookRepoService();
 		BookRepo port = bookRepoService.getBookRepoPort(new org.apache.cxf.ws.addressing.WSAddressingFeature());
