@@ -2,7 +2,13 @@ SIGUIENDO ALGUNOS PASOS DE CONFIGURACION DE SSL DE: http://web-gmazza.rhcloud.co
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+PARA ESTE EJEMPLO, LA CONFIGURACION DE SSL ES OPCIONAL...
+EN CASO DE QUERER DESACTIVARLA, ELIMINAR EL <security-constraint> DEL web.xml.
+
 DEPOSITAR EL KEYSTORE cert/serverKeystore.jks EN $TOMCAT/conf/
+(EL CERFICADO TIENE UN PERIODO DE VENCIMIENTO. EN CASO DE VENCER VOLVERLO A GENERAR CON: 
+	keytool -genkeypair -keyalg RSA -validity 730 -alias myserverkey -keystore serverKeystore.jks -dname "cn=localhost" -keypass password -storepass password
+	NOTAR QUE EL keypass Y EL storepass DEBEN SER IGUALES.)
 
 AGREGAR AL ARCHIVO $TOMCAT/conf/server.xml :
 	<Connector port="8443" protocol="org.apache.coyote.http11.Http11NioProtocol" maxThreads="150" SSLEnabled="true" keystoreFile="conf/serverKeystore.jks" keystorePass="password">

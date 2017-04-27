@@ -16,19 +16,22 @@
 		address="/BookRepo" wsdlLocation="/WEB-INF/wsdl/BookRepoImpl.wsdl">
 
 		<jaxws:properties>
+
 			<entry key="ws-security.callback-handler">
 				<ref bean="myPasswordCallback" />
 			</entry>
 			<entry key="ws-security.encryption.properties" value="serviceKeystore.properties" />
 			<entry key="ws-security.signature.properties" value="serviceKeystore.properties" />
-			
-			<!-- Of special note is the useReqSigCert value for the encryptionUser parameter in the WSS4JOutInterceptor above. 
-			When this value is used instead of a specific client key alias, 
-			it tells the service to use the same key that was used to sign the SOAP request. 
-			This allows the service to handle any client whose public key is in the service's truststore. -->
-			<!-- "useReqSigCert" config property: It uses the client signing certificate to encrypt the response to the client. -->
+
+			<!-- Of special note is the useReqSigCert value for the encryptionUser 
+				parameter in the WSS4JOutInterceptor above. When this value is used instead 
+				of a specific client key alias, it tells the service to use the same key 
+				that was used to sign the SOAP request. This allows the service to handle 
+				any client whose public key is in the service's truststore. -->
+			<!-- "useReqSigCert" config property: It uses the client signing certificate 
+				to encrypt the response to the client. -->
 			<entry key="ws-security.encryption.username" value="useReqSigCert" />
-			
+
 		</jaxws:properties>
 
 
