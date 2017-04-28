@@ -1,0 +1,105 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>mz.ex.ws</groupId>
+	<artifactId>CxfMavenSslX509Endorsing</artifactId>
+	<version>0.0.1</version>
+	<packaging>war</packaging>
+
+	<properties>
+		<cxf.version>3.1.10</cxf.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-frontend-jaxws</artifactId>
+			<version>${cxf.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-transports-http</artifactId>
+			<version>${cxf.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-ws-security</artifactId>
+			<version>${cxf.version}</version>
+		</dependency>
+
+		<!-- Jetty is needed if you're are not using the CXFServlet -->
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-transports-http-jetty</artifactId>
+			<version>${cxf.version}</version>
+		</dependency>
+
+		<!-- SPRING WEB ES NECESARIO PARA EL FUNCIONAMIENTO DE CXF -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>4.3.7.RELEASE</version>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+		<!-- ESTE PLUGIN SIRVE PARA GENERAR UN WSDL A PARTIR DE LAS CLASES DE SERVICIO 
+			WEB DEL PROYECTO. -->
+		<!-- CON LA CONFIGURACION INDICADA MAS ABAJO, SE GENERARA UN WSDL A PARTIR 
+			DE LA CLASE mz.ex.ws.BookRepo Y SERA DEPOSITADO EN target\generated\wsdl. 
+			TAMBIEN SE GENERARAN CLASES CLIENTE Y DE SERVIDOR. DICHAS CLASES SE DEPOSITARAN 
+			EN UN DIRECTORIO CORRESPONDIENTE AL PAQUETE (mz/ex/ws) DESDE LA RAIZ DEL 
+			PROYECTO (/mz/ex/ws/*). -->
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.cxf</groupId>
+					<artifactId>cxf-java2ws-plugin</artifactId>
+					<version>${cxf.version}</version>
+
+					<executions>
+						<execution>
+							<id>process-classes</id>
+							<phase>process-classes</phase>
+							<configuration>
+								<className>mz.ex.ws.BookRepoImpl</className>
+								<genWsdl>true</genWsdl>
+								<verbose>true</verbose>
+								<genServer>true</genServer>
+								<genClient>true</genClient>
+							</configuration>
+							<goals>
+								<goal>java2ws</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.5.1</version>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>3.0.0</version>
+				<configuration>
+					<warSourceDirectory>WebContent</warSourceDirectory>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.cxf</groupId>
+				<artifactId>cxf-java2ws-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+</project>
