@@ -28,8 +28,13 @@ public class BookRepoClient {
 		System.setProperty("com.sun.xml.ws.transport.http.HttpAdapter.dump", "true");
 		System.setProperty("com.sun.xml.internal.ws.transport.http.HttpAdapter.dump", "true");
 
-
 		BookRepoService bookRepoService = new BookRepoService();
+		/*
+		 * DADO QUE EL WSDL ESPECIFICA <wsam:Addressing /> o <wsam:UsingAddressing /> SE ESPERA QUE EL MENSAJE DE
+		 * ENTRADA CONTENGA UN <Address/>. PARA QUE EL MENSAJE ENVIADO POR EL CLIENTE CONTENGA UN <Address/>, SE PUEDE
+		 * OBTENER EL PORT USANDO new org.apache.cxf.ws.addressing.WSAddressingFeature() O SE PUEDE AGREGAR LA
+		 * ANNOTATION @Addressing A LA INTERFAZ DEL SERVICIO.
+		 */
 		BookRepo port = bookRepoService.getBookRepoPort(new org.apache.cxf.ws.addressing.WSAddressingFeature());
 		BookRequest bookRequest = new BookRequest();
 		bookRequest.setIsbn(1234L);
