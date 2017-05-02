@@ -78,7 +78,7 @@
 	
 	<wsdl:service name="BookRepoService">
 		<wsdl:port name="BookRepoPort" binding="tns:BookRepoServiceSoapBinding">
-			<soap:address location="http://localhost:9090/BookRepoPort" />
+			<soap:address location="https://localhost:8443/CxfMavenSslUsernametoken-0.0.1/BookRepo" />
 		</wsdl:port>
 	</wsdl:service>
 

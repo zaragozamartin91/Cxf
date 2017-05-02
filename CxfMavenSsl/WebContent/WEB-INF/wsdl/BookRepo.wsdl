@@ -64,7 +64,7 @@
   </wsdl:binding>
   <wsdl:service name="BookRepoService">
     <wsdl:port name="BookRepoPort" binding="tns:BookRepoServiceSoapBinding">
-      <soap:address location="https://localhost:8443/CxfMavenSsl-0.0.1/services/BookRepo"/>
+      <soap:address location="https://localhost:8443/CxfMavenSsl-0.0.1/BookRepo"/>
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>
