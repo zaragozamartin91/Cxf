@@ -22,20 +22,12 @@
         -->
 
         <!-- Uncomment if using CXF interceptor method -->
-        <!--jaxws:outInterceptors>
-            <bean class="org.apache.cxf.ws.security.wss4j.WSS4JOutInterceptor">
-                <constructor-arg>
-                    <map>
-                        <entry key="action" value="UsernameToken"/>
-                        <entry key="user" value="joe"/>
-                        <entry key="passwordType" value="PasswordText"/>
-                        <entry key="passwordCallbackRef" value-ref="myPasswordCallback"/>
-                    </map>
-                </constructor-arg>
-            </bean>
-        </jaxws:outInterceptors-->
+<!--         <jaxws:outInterceptors> -->
+<!-- 			<ref bean="myOutInterceptor" /> -->
+<!--         </jaxws:outInterceptors> -->
     </jaxws:client>
 
     <bean id="myPasswordCallback" class="client.ClientPasswordCallback"/>
+<!--     <bean id="myOutInterceptor" class="client.MyCxfSoapOutInterceptor"/> -->
 
 </beans>
