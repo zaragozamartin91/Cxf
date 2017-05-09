@@ -1,0 +1,1286 @@
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy"
+	xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="https://wssba.prismamp.com" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract"
+	xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata"
+	xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy"
+	xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+	xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	name="Service" targetNamespace="https://wssba.prismamp.com">
+	<wsp:Policy wsu:Id="WSHttpBinding_INetworkService_policy">
+		<wsp:ExactlyOne>
+			<wsp:All>
+				<sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+					<wsp:Policy>
+						<sp:TransportToken>
+							<wsp:Policy>
+								<sp:HttpsToken RequireClientCertificate="false" />
+							</wsp:Policy>
+						</sp:TransportToken>
+						<sp:AlgorithmSuite>
+							<wsp:Policy>
+								<sp:Basic256 />
+							</wsp:Policy>
+						</sp:AlgorithmSuite>
+						<sp:Layout>
+							<wsp:Policy>
+								<sp:Strict />
+							</wsp:Policy>
+						</sp:Layout>
+						<sp:IncludeTimestamp />
+					</wsp:Policy>
+				</sp:TransportBinding>
+				<sp:EndorsingSupportingTokens xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+					<wsp:Policy>
+						<sp:X509Token sp:IncludeToken="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy/IncludeToken/AlwaysToRecipient">
+							<wsp:Policy>
+								<sp:RequireThumbprintReference />
+								<sp:WssX509V3Token10 />
+							</wsp:Policy>
+						</sp:X509Token>
+						<sp:SignedParts>
+							<sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+						</sp:SignedParts>
+					</wsp:Policy>
+				</sp:EndorsingSupportingTokens>
+				<sp:Wss11 xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+					<wsp:Policy>
+						<sp:MustSupportRefThumbprint />
+					</wsp:Policy>
+				</sp:Wss11>
+				<sp:Trust10 xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+					<wsp:Policy>
+						<sp:MustSupportIssuedTokens />
+						<sp:RequireClientEntropy />
+						<sp:RequireServerEntropy />
+					</wsp:Policy>
+				</sp:Trust10>
+				<wsaw:UsingAddressing />
+			</wsp:All>
+		</wsp:ExactlyOne>
+	</wsp:Policy>
+	<wsdl:types>
+		<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="https://wssba.prismamp.com">
+			<xs:import namespace="https://wssba.prismamp.com/entities" />
+			<xs:import namespace="http://schemas.datacontract.org/2004/07/Com.Gyf.Sba.Common.Entities.Monitoring" />
+			<xs:element name="AcceptedBenefitsQueryRH">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element xmlns:q1="https://wssba.prismamp.com/entities" minOccurs="0" name="request" nillable="true"
+							type="q1:AcceptedBenefitsQueryRHRequest" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="AcceptedBenefitsQueryRHResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element xmlns:q2="https://wssba.prismamp.com/entities" minOccurs="0" name="AcceptedBenefitsQueryRHResult"
+							nillable="true" type="q2:AcceptedBenefitsQueryRHResponse" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="AddVerifyAgreementRH">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element xmlns:q3="https://wssba.prismamp.com/entities" minOccurs="0" name="request" nillable="true"
+							type="q3:AddVerifyAgreementRHRequest" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="AddVerifyAgreementRHResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element xmlns:q4="https://wssba.prismamp.com/entities" minOccurs="0" name="AddVerifyAgreementRHResult"
+							nillable="true" type="q4:AddVerifyAgreementRHResponse" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="BenefitsQuery">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element xmlns:q5="https://wssba.prismamp.com/entities" minOccurs="0" name="request" nillable="true"
+							type="q5:BenefitsQueryRequest" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="BenefitsQueryResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element xmlns:q6="https://wssba.prismamp.com/entities" minOccurs="0" name="BenefitsQueryResult"
+							nillable="true" type="q6:BenefitsQueryResponse" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="BenefitsQueryRH">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element xmlns:q7="https://wssba.prismamp.com/entities" minOccurs="0" name="request" nillable="true"
+							type="q7:BenefitsQueryRHRequest" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="BenefitsQueryRHResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element xmlns:q8="https://wssba.prismamp.com/entities" minOccurs="0" name="BenefitsQueryRHResult"
+							nillable="true" type="q8:BenefitsQueryRHResponse" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="CppQuery">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element xmlns:q9="https://wssba.prismamp.com/entities" minOccurs="0" name="request" nillable="true"
+							type="q9:CppQueryRequest" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="CppQueryResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element xmlns:q10="https://wssba.prismamp.com/entities" minOccurs="0" name="CppQueryResult"
+							nillable="true" type="q10:CppQueryResponse" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Enroll">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element xmlns:q11="https://wssba.prismamp.com/entities" minOccurs="0" name="request" nillable="true"
+							type="q11:EnrollRequest" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="EnrollResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element xmlns:q12="https://wssba.prismamp.com/entities" minOccurs="0" name="EnrollResult" nillable="true"
+							type="q12:EnrollResponse" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetAgreementRH">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element xmlns:q13="https://wssba.prismamp.com/entities" minOccurs="0" name="request" nillable="true"
+							type="q13:GetAgreementRHRequest" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetAgreementRHResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element xmlns:q14="https://wssba.prismamp.com/entities" minOccurs="0" name="GetAgreementRHResult"
+							nillable="true" type="q14:GetAgreementRHResponse" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetCuilState">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element xmlns:q15="https://wssba.prismamp.com/entities" minOccurs="0" name="request" nillable="true"
+							type="q15:GetCuilStateRequest" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetCuilStateResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element xmlns:q16="https://wssba.prismamp.com/entities" minOccurs="0" name="GetCuilStateResult"
+							nillable="true" type="q16:GetCuilStateResponse" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetEnrollResult">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element xmlns:q17="https://wssba.prismamp.com/entities" minOccurs="0" name="request" nillable="true"
+							type="q17:GetEnrollResultRequest" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetEnrollResultResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element xmlns:q18="https://wssba.prismamp.com/entities" minOccurs="0" name="GetEnrollResultResult"
+							nillable="true" type="q18:GetEnrollResultResponse" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Monitor1">
+				<xs:complexType>
+					<xs:sequence />
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Monitor1Response">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/Com.Gyf.Sba.Common.Entities.Monitoring"
+							minOccurs="0" name="Monitor1Result" nillable="true" type="q19:ComponentResult" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Monitor2">
+				<xs:complexType>
+					<xs:sequence />
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Monitor2Response">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/Com.Gyf.Sba.Common.Entities.Monitoring"
+							minOccurs="0" name="Monitor2Result" nillable="true" type="q20:ComponentResult" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="PaymentDateQuery">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element xmlns:q21="https://wssba.prismamp.com/entities" minOccurs="0" name="request" nillable="true"
+							type="q21:PaymentDateQueryRequest" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="PaymentDateQueryResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element xmlns:q22="https://wssba.prismamp.com/entities" minOccurs="0" name="PaymentDateQueryResult"
+							nillable="true" type="q22:PaymentDateQueryResponse" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Test">
+				<xs:complexType>
+					<xs:sequence />
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="TestResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="TestResult" nillable="true" type="xs:string" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Verify">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element xmlns:q23="https://wssba.prismamp.com/entities" minOccurs="0" name="request" nillable="true"
+							type="q23:VerifyRequest" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="VerifyResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element xmlns:q24="https://wssba.prismamp.com/entities" minOccurs="0" name="VerifyResult" nillable="true"
+							type="q24:VerifyResponse" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:schema>
+		<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://schemas.microsoft.com/2003/10/Serialization/"
+			attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://schemas.microsoft.com/2003/10/Serialization/">
+			<xs:element name="anyType" nillable="true" type="xs:anyType" />
+			<xs:element name="anyURI" nillable="true" type="xs:anyURI" />
+			<xs:element name="base64Binary" nillable="true" type="xs:base64Binary" />
+			<xs:element name="boolean" nillable="true" type="xs:boolean" />
+			<xs:element name="byte" nillable="true" type="xs:byte" />
+			<xs:element name="dateTime" nillable="true" type="xs:dateTime" />
+			<xs:element name="decimal" nillable="true" type="xs:decimal" />
+			<xs:element name="double" nillable="true" type="xs:double" />
+			<xs:element name="float" nillable="true" type="xs:float" />
+			<xs:element name="int" nillable="true" type="xs:int" />
+			<xs:element name="long" nillable="true" type="xs:long" />
+			<xs:element name="QName" nillable="true" type="xs:QName" />
+			<xs:element name="short" nillable="true" type="xs:short" />
+			<xs:element name="string" nillable="true" type="xs:string" />
+			<xs:element name="unsignedByte" nillable="true" type="xs:unsignedByte" />
+			<xs:element name="unsignedInt" nillable="true" type="xs:unsignedInt" />
+			<xs:element name="unsignedLong" nillable="true" type="xs:unsignedLong" />
+			<xs:element name="unsignedShort" nillable="true" type="xs:unsignedShort" />
+			<xs:element name="char" nillable="true" type="tns:char" />
+			<xs:simpleType name="char">
+				<xs:restriction base="xs:int" />
+			</xs:simpleType>
+			<xs:element name="duration" nillable="true" type="tns:duration" />
+			<xs:simpleType name="duration">
+				<xs:restriction base="xs:duration">
+					<xs:pattern value="\-?P(\d*D)?(T(\d*H)?(\d*M)?(\d*(\.\d*)?S)?)?" />
+					<xs:minInclusive value="-P10675199DT2H48M5.4775808S" />
+					<xs:maxInclusive value="P10675199DT2H48M5.4775807S" />
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:element name="guid" nillable="true" type="tns:guid" />
+			<xs:simpleType name="guid">
+				<xs:restriction base="xs:string">
+					<xs:pattern value="[\da-fA-F]{8}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{12}" />
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:attribute name="FactoryType" type="xs:QName" />
+			<xs:attribute name="Id" type="xs:ID" />
+			<xs:attribute name="Ref" type="xs:IDREF" />
+		</xs:schema>
+		<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="https://wssba.prismamp.com/entities"
+			elementFormDefault="qualified" targetNamespace="https://wssba.prismamp.com/entities">
+			<xs:complexType name="AcceptedBenefitsQueryRHRequest">
+				<xs:sequence>
+					<xs:element name="Document" nillable="true" type="tns:DocumentDto">
+						<xs:annotation>
+							<xs:appinfo>
+								<DefaultValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/" EmitDefaultValue="false" />
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="NroBeneficio" type="xs:decimal">
+						<xs:annotation>
+							<xs:appinfo>
+								<DefaultValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/" EmitDefaultValue="false" />
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="Request" nillable="true" type="tns:RequestDto">
+						<xs:annotation>
+							<xs:appinfo>
+								<DefaultValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/" EmitDefaultValue="false" />
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="AcceptedBenefitsQueryRHRequest" nillable="true" type="tns:AcceptedBenefitsQueryRHRequest" />
+			<xs:complexType name="DocumentDto">
+				<xs:sequence>
+					<xs:element name="DocumentNumber" nillable="true" type="xs:string">
+						<xs:annotation>
+							<xs:appinfo>
+								<DefaultValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/" EmitDefaultValue="false" />
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="Nationality" nillable="true" type="xs:string">
+						<xs:annotation>
+							<xs:appinfo>
+								<DefaultValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/" EmitDefaultValue="false" />
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="TypeId" nillable="true" type="xs:string">
+						<xs:annotation>
+							<xs:appinfo>
+								<DefaultValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/" EmitDefaultValue="false" />
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="DocumentDto" nillable="true" type="tns:DocumentDto" />
+			<xs:complexType name="RequestDto">
+				<xs:sequence>
+					<xs:element name="Entity" nillable="true" type="xs:string">
+						<xs:annotation>
+							<xs:appinfo>
+								<DefaultValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/" EmitDefaultValue="false" />
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="Metadata" nillable="true" type="tns:ArrayOfMetadataDto" />
+					<xs:element minOccurs="0" name="Terminal" nillable="true" type="xs:string" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="RequestDto" nillable="true" type="tns:RequestDto" />
+			<xs:complexType name="ArrayOfMetadataDto">
+				<xs:sequence>
+					<xs:element minOccurs="0" maxOccurs="unbounded" name="MetadataDto" nillable="true" type="tns:MetadataDto" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="ArrayOfMetadataDto" nillable="true" type="tns:ArrayOfMetadataDto" />
+			<xs:complexType name="MetadataDto">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+					<xs:element minOccurs="0" name="Value" nillable="true" type="xs:string" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="MetadataDto" nillable="true" type="tns:MetadataDto" />
+			<xs:complexType name="AcceptedBenefitsQueryRHResponse">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="Benefits" nillable="true" type="tns:ArrayOfAcceptedBenefitDtoRH" />
+					<xs:element minOccurs="0" name="Response" nillable="true" type="tns:ResponseDto" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="AcceptedBenefitsQueryRHResponse" nillable="true" type="tns:AcceptedBenefitsQueryRHResponse" />
+			<xs:complexType name="ArrayOfAcceptedBenefitDtoRH">
+				<xs:sequence>
+					<xs:element minOccurs="0" maxOccurs="unbounded" name="AcceptedBenefitDtoRH" nillable="true"
+						type="tns:AcceptedBenefitDtoRH" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="ArrayOfAcceptedBenefitDtoRH" nillable="true" type="tns:ArrayOfAcceptedBenefitDtoRH" />
+			<xs:complexType name="AcceptedBenefitDtoRH">
+				<xs:complexContent mixed="false">
+					<xs:extension base="tns:BenefitDtoRH">
+						<xs:sequence>
+							<xs:element name="Cuil" nillable="true" type="xs:string" />
+							<xs:element name="FechaAceptacion" nillable="true" type="xs:dateTime" />
+							<xs:element name="IdAcuerdo" nillable="true" type="xs:string" />
+							<xs:element name="Terminal" nillable="true" type="xs:string" />
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:element name="AcceptedBenefitDtoRH" nillable="true" type="tns:AcceptedBenefitDtoRH" />
+			<xs:complexType name="BenefitDtoRH">
+				<xs:sequence>
+					<xs:element name="ApellidoYNombre" nillable="true" type="xs:string">
+						<xs:annotation>
+							<xs:appinfo>
+								<DefaultValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/" EmitDefaultValue="false" />
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="NroBeneficio" type="xs:decimal">
+						<xs:annotation>
+							<xs:appinfo>
+								<DefaultValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/" EmitDefaultValue="false" />
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="BenefitDtoRH" nillable="true" type="tns:BenefitDtoRH" />
+			<xs:complexType name="ResponseDto">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="Errors" nillable="true" type="tns:ArrayOfResponseMessageDto" />
+					<xs:element minOccurs="0" name="HasErrors" type="xs:boolean" />
+					<xs:element minOccurs="0" name="Metadata" nillable="true" type="tns:ArrayOfMetadataDto" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="ResponseDto" nillable="true" type="tns:ResponseDto" />
+			<xs:complexType name="ArrayOfResponseMessageDto">
+				<xs:sequence>
+					<xs:element minOccurs="0" maxOccurs="unbounded" name="ResponseMessageDto" nillable="true"
+						type="tns:ResponseMessageDto" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="ArrayOfResponseMessageDto" nillable="true" type="tns:ArrayOfResponseMessageDto" />
+			<xs:complexType name="ResponseMessageDto">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="Code" nillable="true" type="xs:string" />
+					<xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="ResponseMessageDto" nillable="true" type="tns:ResponseMessageDto" />
+			<xs:complexType name="AddVerifyAgreementRHRequest">
+				<xs:sequence>
+					<xs:element name="Document" nillable="true" type="tns:DocumentDto">
+						<xs:annotation>
+							<xs:appinfo>
+								<DefaultValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/" EmitDefaultValue="false" />
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="IPTerminal" nillable="true" type="xs:string">
+						<xs:annotation>
+							<xs:appinfo>
+								<DefaultValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/" EmitDefaultValue="false" />
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="IdPersona" nillable="true" type="xs:string">
+						<xs:annotation>
+							<xs:appinfo>
+								<DefaultValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/" EmitDefaultValue="false" />
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="NroBeneficio" type="xs:decimal">
+						<xs:annotation>
+							<xs:appinfo>
+								<DefaultValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/" EmitDefaultValue="false" />
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="Request" nillable="true" type="tns:RequestDto">
+						<xs:annotation>
+							<xs:appinfo>
+								<DefaultValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/" EmitDefaultValue="false" />
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="AddVerifyAgreementRHRequest" nillable="true" type="tns:AddVerifyAgreementRHRequest" />
+			<xs:complexType name="AddVerifyAgreementRHResponse">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="Response" nillable="true" type="tns:ResponseDto" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="AddVerifyAgreementRHResponse" nillable="true" type="tns:AddVerifyAgreementRHResponse" />
+			<xs:complexType name="BenefitsQueryRequest">
+				<xs:sequence>
+					<xs:element name="Document" nillable="true" type="tns:DocumentDto">
+						<xs:annotation>
+							<xs:appinfo>
+								<DefaultValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/" EmitDefaultValue="false" />
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="Request" nillable="true" type="tns:RequestDto">
+						<xs:annotation>
+							<xs:appinfo>
+								<DefaultValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/" EmitDefaultValue="false" />
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="BenefitsQueryRequest" nillable="true" type="tns:BenefitsQueryRequest" />
+			<xs:complexType name="BenefitsQueryResponse">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="Benefits" nillable="true" type="tns:ArrayOfBenefitDto" />
+					<xs:element minOccurs="0" name="Response" nillable="true" type="tns:ResponseDto" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="BenefitsQueryResponse" nillable="true" type="tns:BenefitsQueryResponse" />
+			<xs:complexType name="ArrayOfBenefitDto">
+				<xs:sequence>
+					<xs:element minOccurs="0" maxOccurs="unbounded" name="BenefitDto" nillable="true" type="tns:BenefitDto" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="ArrayOfBenefitDto" nillable="true" type="tns:ArrayOfBenefitDto" />
+			<xs:complexType name="BenefitDto">
+				<xs:sequence>
+					<xs:element name="ApellidoYNombre" nillable="true" type="xs:string">
+						<xs:annotation>
+							<xs:appinfo>
+								<DefaultValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/" EmitDefaultValue="false" />
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="CodigoAgencia" nillable="true" type="xs:string">
+						<xs:annotation>
+							<xs:appinfo>
+								<DefaultValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/" EmitDefaultValue="false" />
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="CodigoBanco" nillable="true" type="xs:string">
+						<xs:annotation>
+							<xs:appinfo>
+								<DefaultValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/" EmitDefaultValue="false" />
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="Cuil" nillable="true" type="xs:string">
+						<xs:annotation>
+							<xs:appinfo>
+								<DefaultValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/" EmitDefaultValue="false" />
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="NroBeneficio" type="xs:decimal">
+						<xs:annotation>
+							<xs:appinfo>
+								<DefaultValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/" EmitDefaultValue="false" />
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="NroDoc" type="xs:int">
+						<xs:annotation>
+							<xs:appinfo>
+								<DefaultValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/" EmitDefaultValue="false" />
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="TipoBeneficio" nillable="true" type="xs:string">
+						<xs:annotation>
+							<xs:appinfo>
+								<DefaultValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/" EmitDefaultValue="false" />
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="TipoDoc" nillable="true" type="xs:string">
+						<xs:annotation>
+							<xs:appinfo>
+								<DefaultValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/" EmitDefaultValue="false" />
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="TitularApoderado" nillable="true" type="xs:string">
+						<xs:annotation>
+							<xs:appinfo>
+								<DefaultValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/" EmitDefaultValue="false" />
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="BenefitDto" nillable="true" type="tns:BenefitDto" />
+			<xs:complexType name="BenefitsQueryRHRequest">
+				<xs:sequence>
+					<xs:element name="Document" nillable="true" type="tns:DocumentDto">
+						<xs:annotation>
+							<xs:appinfo>
+								<DefaultValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/" EmitDefaultValue="false" />
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="IdPersona" nillable="true" type="xs:string">
+						<xs:annotation>
+							<xs:appinfo>
+								<DefaultValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/" EmitDefaultValue="false" />
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="Request" nillable="true" type="tns:RequestDto">
+						<xs:annotation>
+							<xs:appinfo>
+								<DefaultValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/" EmitDefaultValue="false" />
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="BenefitsQueryRHRequest" nillable="true" type="tns:BenefitsQueryRHRequest" />
+			<xs:complexType name="BenefitsQueryRHResponse">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="Benefits" nillable="true" type="tns:ArrayOfBenefitDtoRH" />
+					<xs:element minOccurs="0" name="Response" nillable="true" type="tns:ResponseDto" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="BenefitsQueryRHResponse" nillable="true" type="tns:BenefitsQueryRHResponse" />
+			<xs:complexType name="ArrayOfBenefitDtoRH">
+				<xs:sequence>
+					<xs:element minOccurs="0" maxOccurs="unbounded" name="BenefitDtoRH" nillable="true" type="tns:BenefitDtoRH" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="ArrayOfBenefitDtoRH" nillable="true" type="tns:ArrayOfBenefitDtoRH" />
+			<xs:complexType name="CppQueryRequest">
+				<xs:sequence>
+					<xs:element name="BenefitNumber" nillable="true" type="xs:string">
+						<xs:annotation>
+							<xs:appinfo>
+								<DefaultValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/" EmitDefaultValue="false" />
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="Document" nillable="true" type="tns:DocumentDto">
+						<xs:annotation>
+							<xs:appinfo>
+								<DefaultValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/" EmitDefaultValue="false" />
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="PayerEntityCode" nillable="true" type="xs:string">
+						<xs:annotation>
+							<xs:appinfo>
+								<DefaultValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/" EmitDefaultValue="false" />
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="Request" nillable="true" type="tns:RequestDto">
+						<xs:annotation>
+							<xs:appinfo>
+								<DefaultValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/" EmitDefaultValue="false" />
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="CppQueryRequest" nillable="true" type="tns:CppQueryRequest" />
+			<xs:complexType name="CppQueryResponse">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="CppLines" nillable="true" type="tns:ArrayOfCppLineDto" />
+					<xs:element minOccurs="0" name="Response" nillable="true" type="tns:ResponseDto" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="CppQueryResponse" nillable="true" type="tns:CppQueryResponse" />
+			<xs:complexType name="ArrayOfCppLineDto">
+				<xs:sequence>
+					<xs:element minOccurs="0" maxOccurs="unbounded" name="CppLineDto" nillable="true" type="tns:CppLineDto" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="ArrayOfCppLineDto" nillable="true" type="tns:ArrayOfCppLineDto" />
+			<xs:complexType name="CppLineDto">
+				<xs:sequence>
+					<xs:element name="CppLine" nillable="true" type="xs:string">
+						<xs:annotation>
+							<xs:appinfo>
+								<DefaultValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/" EmitDefaultValue="false" />
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="CppLineDto" nillable="true" type="tns:CppLineDto" />
+			<xs:complexType name="EnrollRequest">
+				<xs:sequence>
+					<xs:element name="Document" nillable="true" type="tns:DocumentDto">
+						<xs:annotation>
+							<xs:appinfo>
+								<DefaultValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/" EmitDefaultValue="false" />
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="Fingers" nillable="true" type="tns:ArrayOfFingerDto">
+						<xs:annotation>
+							<xs:appinfo>
+								<DefaultValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/" EmitDefaultValue="false" />
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="Request" nillable="true" type="tns:RequestDto">
+						<xs:annotation>
+							<xs:appinfo>
+								<DefaultValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/" EmitDefaultValue="false" />
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="UserName" nillable="true" type="xs:string">
+						<xs:annotation>
+							<xs:appinfo>
+								<DefaultValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/" EmitDefaultValue="false" />
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="EnrollRequest" nillable="true" type="tns:EnrollRequest" />
+			<xs:complexType name="ArrayOfFingerDto">
+				<xs:sequence>
+					<xs:element minOccurs="0" maxOccurs="unbounded" name="FingerDto" nillable="true" type="tns:FingerDto" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="ArrayOfFingerDto" nillable="true" type="tns:ArrayOfFingerDto" />
+			<xs:complexType name="FingerDto">
+				<xs:sequence>
+					<xs:element name="FingerType" nillable="true" type="xs:string">
+						<xs:annotation>
+							<xs:appinfo>
+								<DefaultValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/" EmitDefaultValue="false" />
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="FingerprintType" nillable="true" type="xs:string">
+						<xs:annotation>
+							<xs:appinfo>
+								<DefaultValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/" EmitDefaultValue="false" />
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="IsAmputation" type="xs:boolean" />
+					<xs:element minOccurs="0" name="Template" nillable="true" type="xs:string">
+						<xs:annotation>
+							<xs:appinfo>
+								<DefaultValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/" EmitDefaultValue="false" />
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="TemplateFormat" nillable="true" type="xs:string">
+						<xs:annotation>
+							<xs:appinfo>
+								<DefaultValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/" EmitDefaultValue="false" />
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="Wsq" nillable="true" type="xs:string">
+						<xs:annotation>
+							<xs:appinfo>
+								<DefaultValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/" EmitDefaultValue="false" />
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="FingerDto" nillable="true" type="tns:FingerDto" />
+			<xs:complexType name="EnrollResponse">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="Response" nillable="true" type="tns:ResponseDto" />
+					<xs:element minOccurs="0" name="TransactionId" type="xs:long" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="EnrollResponse" nillable="true" type="tns:EnrollResponse" />
+			<xs:complexType name="GetAgreementRHRequest">
+				<xs:sequence>
+					<xs:element name="Document" nillable="true" type="tns:DocumentDto">
+						<xs:annotation>
+							<xs:appinfo>
+								<DefaultValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/" EmitDefaultValue="false" />
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="NroBeneficio" type="xs:decimal">
+						<xs:annotation>
+							<xs:appinfo>
+								<DefaultValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/" EmitDefaultValue="false" />
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="Request" nillable="true" type="tns:RequestDto">
+						<xs:annotation>
+							<xs:appinfo>
+								<DefaultValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/" EmitDefaultValue="false" />
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="GetAgreementRHRequest" nillable="true" type="tns:GetAgreementRHRequest" />
+			<xs:complexType name="GetAgreementRHResponse">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="AcuerdoAceptado" nillable="true" type="xs:string" />
+					<xs:element minOccurs="0" name="Response" nillable="true" type="tns:ResponseDto" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="GetAgreementRHResponse" nillable="true" type="tns:GetAgreementRHResponse" />
+			<xs:complexType name="GetCuilStateRequest">
+				<xs:sequence>
+					<xs:element name="Document" nillable="true" type="tns:DocumentDto">
+						<xs:annotation>
+							<xs:appinfo>
+								<DefaultValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/" EmitDefaultValue="false" />
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="Request" nillable="true" type="tns:RequestDto">
+						<xs:annotation>
+							<xs:appinfo>
+								<DefaultValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/" EmitDefaultValue="false" />
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="UserName" nillable="true" type="xs:string">
+						<xs:annotation>
+							<xs:appinfo>
+								<DefaultValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/" EmitDefaultValue="false" />
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="GetCuilStateRequest" nillable="true" type="tns:GetCuilStateRequest" />
+			<xs:complexType name="GetCuilStateResponse">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="CuilState" nillable="true" type="tns:ResponseMessageDto" />
+					<xs:element minOccurs="0" name="LastActivityDate" nillable="true" type="xs:dateTime" />
+					<xs:element minOccurs="0" name="Response" nillable="true" type="tns:ResponseDto" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="GetCuilStateResponse" nillable="true" type="tns:GetCuilStateResponse" />
+			<xs:complexType name="GetEnrollResultRequest">
+				<xs:sequence>
+					<xs:element name="Document" nillable="true" type="tns:DocumentDto">
+						<xs:annotation>
+							<xs:appinfo>
+								<DefaultValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/" EmitDefaultValue="false" />
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="Request" nillable="true" type="tns:RequestDto">
+						<xs:annotation>
+							<xs:appinfo>
+								<DefaultValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/" EmitDefaultValue="false" />
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="TransactionId" type="xs:long" />
+					<xs:element name="UserName" nillable="true" type="xs:string" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="GetEnrollResultRequest" nillable="true" type="tns:GetEnrollResultRequest" />
+			<xs:complexType name="GetEnrollResultResponse">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="EnrollState" nillable="true" type="tns:ResponseMessageDto" />
+					<xs:element minOccurs="0" name="Response" nillable="true" type="tns:ResponseDto" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="GetEnrollResultResponse" nillable="true" type="tns:GetEnrollResultResponse" />
+			<xs:complexType name="PaymentDateQueryRequest">
+				<xs:sequence>
+					<xs:element name="BenefitNumber" nillable="true" type="xs:string">
+						<xs:annotation>
+							<xs:appinfo>
+								<DefaultValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/" EmitDefaultValue="false" />
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="Document" nillable="true" type="tns:DocumentDto">
+						<xs:annotation>
+							<xs:appinfo>
+								<DefaultValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/" EmitDefaultValue="false" />
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="Request" nillable="true" type="tns:RequestDto">
+						<xs:annotation>
+							<xs:appinfo>
+								<DefaultValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/" EmitDefaultValue="false" />
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="PaymentDateQueryRequest" nillable="true" type="tns:PaymentDateQueryRequest" />
+			<xs:complexType name="PaymentDateQueryResponse">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="ApellidoYNombreTitular" nillable="true" type="xs:string" />
+					<xs:element minOccurs="0" name="BenefitNumber" nillable="true" type="xs:string" />
+					<xs:element minOccurs="0" name="CuilTitular" nillable="true" type="xs:string" />
+					<xs:element minOccurs="0" name="NextPaymentDate" type="xs:dateTime" />
+					<xs:element minOccurs="0" name="PayerEntityName" nillable="true" type="xs:string" />
+					<xs:element minOccurs="0" name="Response" nillable="true" type="tns:ResponseDto" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="PaymentDateQueryResponse" nillable="true" type="tns:PaymentDateQueryResponse" />
+			<xs:complexType name="VerifyRequest">
+				<xs:sequence>
+					<xs:element name="Document" nillable="true" type="tns:DocumentDto">
+						<xs:annotation>
+							<xs:appinfo>
+								<DefaultValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/" EmitDefaultValue="false" />
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="Fingers" nillable="true" type="tns:ArrayOfFingerDto">
+						<xs:annotation>
+							<xs:appinfo>
+								<DefaultValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/" EmitDefaultValue="false" />
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="Request" nillable="true" type="tns:RequestDto">
+						<xs:annotation>
+							<xs:appinfo>
+								<DefaultValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/" EmitDefaultValue="false" />
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="VerifyRequest" nillable="true" type="tns:VerifyRequest" />
+			<xs:complexType name="VerifyResponse">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="Response" nillable="true" type="tns:ResponseDto" />
+					<xs:element minOccurs="0" name="TransactionId" type="xs:long" />
+					<xs:element minOccurs="0" name="VerifyState" nillable="true" type="tns:ResponseMessageDto" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="VerifyResponse" nillable="true" type="tns:VerifyResponse" />
+		</xs:schema>
+		<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://schemas.datacontract.org/2004/07/Com.Gyf.Sba.Common.Entities.Monitoring"
+			elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Com.Gyf.Sba.Common.Entities.Monitoring">
+			<xs:complexType name="ComponentResult">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="AdditionalInfo" nillable="true" type="tns:ArrayOfAdditionalData" />
+					<xs:element minOccurs="0" name="ComponentName" nillable="true" type="xs:string" />
+					<xs:element minOccurs="0" name="Components" nillable="true" type="tns:ArrayOfComponentResult" />
+					<xs:element minOccurs="0" name="Time" type="xs:long" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="ComponentResult" nillable="true" type="tns:ComponentResult" />
+			<xs:complexType name="ArrayOfAdditionalData">
+				<xs:sequence>
+					<xs:element minOccurs="0" maxOccurs="unbounded" name="AdditionalData" nillable="true" type="tns:AdditionalData" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="ArrayOfAdditionalData" nillable="true" type="tns:ArrayOfAdditionalData" />
+			<xs:complexType name="AdditionalData">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+					<xs:element minOccurs="0" name="Value" nillable="true" type="xs:string" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="AdditionalData" nillable="true" type="tns:AdditionalData" />
+			<xs:complexType name="ArrayOfComponentResult">
+				<xs:sequence>
+					<xs:element minOccurs="0" maxOccurs="unbounded" name="ComponentResult" nillable="true" type="tns:ComponentResult" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="ArrayOfComponentResult" nillable="true" type="tns:ArrayOfComponentResult" />
+		</xs:schema>
+	</wsdl:types>
+	<wsdl:message name="INetworkService_AcceptedBenefitsQueryRH_InputMessage">
+		<wsdl:part name="parameters" element="tns:AcceptedBenefitsQueryRH" />
+	</wsdl:message>
+	<wsdl:message name="INetworkService_AcceptedBenefitsQueryRH_OutputMessage">
+		<wsdl:part name="parameters" element="tns:AcceptedBenefitsQueryRHResponse" />
+	</wsdl:message>
+	<wsdl:message name="INetworkService_AddVerifyAgreementRH_InputMessage">
+		<wsdl:part name="parameters" element="tns:AddVerifyAgreementRH" />
+	</wsdl:message>
+	<wsdl:message name="INetworkService_AddVerifyAgreementRH_OutputMessage">
+		<wsdl:part name="parameters" element="tns:AddVerifyAgreementRHResponse" />
+	</wsdl:message>
+	<wsdl:message name="INetworkService_BenefitsQuery_InputMessage">
+		<wsdl:part name="parameters" element="tns:BenefitsQuery" />
+	</wsdl:message>
+	<wsdl:message name="INetworkService_BenefitsQuery_OutputMessage">
+		<wsdl:part name="parameters" element="tns:BenefitsQueryResponse" />
+	</wsdl:message>
+	<wsdl:message name="INetworkService_BenefitsQueryRH_InputMessage">
+		<wsdl:part name="parameters" element="tns:BenefitsQueryRH" />
+	</wsdl:message>
+	<wsdl:message name="INetworkService_BenefitsQueryRH_OutputMessage">
+		<wsdl:part name="parameters" element="tns:BenefitsQueryRHResponse" />
+	</wsdl:message>
+	<wsdl:message name="INetworkService_CppQuery_InputMessage">
+		<wsdl:part name="parameters" element="tns:CppQuery" />
+	</wsdl:message>
+	<wsdl:message name="INetworkService_CppQuery_OutputMessage">
+		<wsdl:part name="parameters" element="tns:CppQueryResponse" />
+	</wsdl:message>
+	<wsdl:message name="INetworkService_Enroll_InputMessage">
+		<wsdl:part name="parameters" element="tns:Enroll" />
+	</wsdl:message>
+	<wsdl:message name="INetworkService_Enroll_OutputMessage">
+		<wsdl:part name="parameters" element="tns:EnrollResponse" />
+	</wsdl:message>
+	<wsdl:message name="INetworkService_GetAgreementRH_InputMessage">
+		<wsdl:part name="parameters" element="tns:GetAgreementRH" />
+	</wsdl:message>
+	<wsdl:message name="INetworkService_GetAgreementRH_OutputMessage">
+		<wsdl:part name="parameters" element="tns:GetAgreementRHResponse" />
+	</wsdl:message>
+	<wsdl:message name="INetworkService_GetCuilState_InputMessage">
+		<wsdl:part name="parameters" element="tns:GetCuilState" />
+	</wsdl:message>
+	<wsdl:message name="INetworkService_GetCuilState_OutputMessage">
+		<wsdl:part name="parameters" element="tns:GetCuilStateResponse" />
+	</wsdl:message>
+	<wsdl:message name="INetworkService_GetEnrollResult_InputMessage">
+		<wsdl:part name="parameters" element="tns:GetEnrollResult" />
+	</wsdl:message>
+	<wsdl:message name="INetworkService_GetEnrollResult_OutputMessage">
+		<wsdl:part name="parameters" element="tns:GetEnrollResultResponse" />
+	</wsdl:message>
+	<wsdl:message name="INetworkService_Monitor1_InputMessage">
+		<wsdl:part name="parameters" element="tns:Monitor1" />
+	</wsdl:message>
+	<wsdl:message name="INetworkService_Monitor1_OutputMessage">
+		<wsdl:part name="parameters" element="tns:Monitor1Response" />
+	</wsdl:message>
+	<wsdl:message name="INetworkService_Monitor2_InputMessage">
+		<wsdl:part name="parameters" element="tns:Monitor2" />
+	</wsdl:message>
+	<wsdl:message name="INetworkService_Monitor2_OutputMessage">
+		<wsdl:part name="parameters" element="tns:Monitor2Response" />
+	</wsdl:message>
+	<wsdl:message name="INetworkService_PaymentDateQuery_InputMessage">
+		<wsdl:part name="parameters" element="tns:PaymentDateQuery" />
+	</wsdl:message>
+	<wsdl:message name="INetworkService_PaymentDateQuery_OutputMessage">
+		<wsdl:part name="parameters" element="tns:PaymentDateQueryResponse" />
+	</wsdl:message>
+	<wsdl:message name="INetworkService_Test_InputMessage">
+		<wsdl:part name="parameters" element="tns:Test" />
+	</wsdl:message>
+	<wsdl:message name="INetworkService_Test_OutputMessage">
+		<wsdl:part name="parameters" element="tns:TestResponse" />
+	</wsdl:message>
+	<wsdl:message name="INetworkService_Verify_InputMessage">
+		<wsdl:part name="parameters" element="tns:Verify" />
+	</wsdl:message>
+	<wsdl:message name="INetworkService_Verify_OutputMessage">
+		<wsdl:part name="parameters" element="tns:VerifyResponse" />
+	</wsdl:message>
+	<wsdl:portType name="INetworkService">
+		<wsdl:operation name="AcceptedBenefitsQueryRH">
+			<wsdl:input wsaw:Action="https://wssba.prismamp.com/INetworkService/AcceptedBenefitsQueryRH" message="tns:INetworkService_AcceptedBenefitsQueryRH_InputMessage" />
+			<wsdl:output wsaw:Action="https://wssba.prismamp.com/INetworkService/AcceptedBenefitsQueryRHResponse"
+				message="tns:INetworkService_AcceptedBenefitsQueryRH_OutputMessage" />
+		</wsdl:operation>
+		<wsdl:operation name="AddVerifyAgreementRH">
+			<wsdl:input wsaw:Action="https://wssba.prismamp.com/INetworkService/AddVerifyAgreementRH" message="tns:INetworkService_AddVerifyAgreementRH_InputMessage" />
+			<wsdl:output wsaw:Action="https://wssba.prismamp.com/INetworkService/AddVerifyAgreementRHResponse"
+				message="tns:INetworkService_AddVerifyAgreementRH_OutputMessage" />
+		</wsdl:operation>
+		<wsdl:operation name="BenefitsQuery">
+			<wsdl:input wsaw:Action="https://wssba.prismamp.com/INetworkService/BenefitsQuery" message="tns:INetworkService_BenefitsQuery_InputMessage" />
+			<wsdl:output wsaw:Action="https://wssba.prismamp.com/INetworkService/BenefitsQueryResponse" message="tns:INetworkService_BenefitsQuery_OutputMessage" />
+		</wsdl:operation>
+		<wsdl:operation name="BenefitsQueryRH">
+			<wsdl:input wsaw:Action="https://wssba.prismamp.com/INetworkService/BenefitsQueryRH" message="tns:INetworkService_BenefitsQueryRH_InputMessage" />
+			<wsdl:output wsaw:Action="https://wssba.prismamp.com/INetworkService/BenefitsQueryRHResponse" message="tns:INetworkService_BenefitsQueryRH_OutputMessage" />
+		</wsdl:operation>
+		<wsdl:operation name="CppQuery">
+			<wsdl:input wsaw:Action="https://wssba.prismamp.com/INetworkService/CppQuery" message="tns:INetworkService_CppQuery_InputMessage" />
+			<wsdl:output wsaw:Action="https://wssba.prismamp.com/INetworkService/CppQueryResponse" message="tns:INetworkService_CppQuery_OutputMessage" />
+		</wsdl:operation>
+		<wsdl:operation name="Enroll">
+			<wsdl:input wsaw:Action="https://wssba.prismamp.com/INetworkService/Enroll" message="tns:INetworkService_Enroll_InputMessage" />
+			<wsdl:output wsaw:Action="https://wssba.prismamp.com/INetworkService/EnrollResponse" message="tns:INetworkService_Enroll_OutputMessage" />
+		</wsdl:operation>
+		<wsdl:operation name="GetAgreementRH">
+			<wsdl:input wsaw:Action="https://wssba.prismamp.com/INetworkService/GetAgreementRH" message="tns:INetworkService_GetAgreementRH_InputMessage" />
+			<wsdl:output wsaw:Action="https://wssba.prismamp.com/INetworkService/GetAgreementRHResponse" message="tns:INetworkService_GetAgreementRH_OutputMessage" />
+		</wsdl:operation>
+		<wsdl:operation name="GetCuilState">
+			<wsdl:input wsaw:Action="https://wssba.prismamp.com/INetworkService/GetCuilState" message="tns:INetworkService_GetCuilState_InputMessage" />
+			<wsdl:output wsaw:Action="https://wssba.prismamp.com/INetworkService/GetCuilStateResponse" message="tns:INetworkService_GetCuilState_OutputMessage" />
+		</wsdl:operation>
+		<wsdl:operation name="GetEnrollResult">
+			<wsdl:input wsaw:Action="https://wssba.prismamp.com/INetworkService/GetEnrollResult" message="tns:INetworkService_GetEnrollResult_InputMessage" />
+			<wsdl:output wsaw:Action="https://wssba.prismamp.com/INetworkService/GetEnrollResultResponse" message="tns:INetworkService_GetEnrollResult_OutputMessage" />
+		</wsdl:operation>
+		<wsdl:operation name="Monitor1">
+			<wsdl:input wsaw:Action="https://wssba.prismamp.com/INetworkService/Monitor1" message="tns:INetworkService_Monitor1_InputMessage" />
+			<wsdl:output wsaw:Action="https://wssba.prismamp.com/INetworkService/Monitor1Response" message="tns:INetworkService_Monitor1_OutputMessage" />
+		</wsdl:operation>
+		<wsdl:operation name="Monitor2">
+			<wsdl:input wsaw:Action="https://wssba.prismamp.com/INetworkService/Monitor2" message="tns:INetworkService_Monitor2_InputMessage" />
+			<wsdl:output wsaw:Action="https://wssba.prismamp.com/INetworkService/Monitor2Response" message="tns:INetworkService_Monitor2_OutputMessage" />
+		</wsdl:operation>
+		<wsdl:operation name="PaymentDateQuery">
+			<wsdl:input wsaw:Action="https://wssba.prismamp.com/INetworkService/PaymentDateQuery" message="tns:INetworkService_PaymentDateQuery_InputMessage" />
+			<wsdl:output wsaw:Action="https://wssba.prismamp.com/INetworkService/PaymentDateQueryResponse" message="tns:INetworkService_PaymentDateQuery_OutputMessage" />
+		</wsdl:operation>
+		<wsdl:operation name="Test">
+			<wsdl:input wsaw:Action="https://wssba.prismamp.com/INetworkService/Test" message="tns:INetworkService_Test_InputMessage" />
+			<wsdl:output wsaw:Action="https://wssba.prismamp.com/INetworkService/TestResponse" message="tns:INetworkService_Test_OutputMessage" />
+		</wsdl:operation>
+		<wsdl:operation name="Verify">
+			<wsdl:input wsaw:Action="https://wssba.prismamp.com/INetworkService/Verify" message="tns:INetworkService_Verify_InputMessage" />
+			<wsdl:output wsaw:Action="https://wssba.prismamp.com/INetworkService/VerifyResponse" message="tns:INetworkService_Verify_OutputMessage" />
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="WSHttpBinding_INetworkService" type="tns:INetworkService">
+		<wsp:PolicyReference URI="#WSHttpBinding_INetworkService_policy" />
+		<soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="AcceptedBenefitsQueryRH">
+			<soap12:operation soapAction="https://wssba.prismamp.com/INetworkService/AcceptedBenefitsQueryRH"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="AddVerifyAgreementRH">
+			<soap12:operation soapAction="https://wssba.prismamp.com/INetworkService/AddVerifyAgreementRH"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="BenefitsQuery">
+			<soap12:operation soapAction="https://wssba.prismamp.com/INetworkService/BenefitsQuery" style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="BenefitsQueryRH">
+			<soap12:operation soapAction="https://wssba.prismamp.com/INetworkService/BenefitsQueryRH" style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="CppQuery">
+			<soap12:operation soapAction="https://wssba.prismamp.com/INetworkService/CppQuery" style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="Enroll">
+			<soap12:operation soapAction="https://wssba.prismamp.com/INetworkService/Enroll" style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetAgreementRH">
+			<soap12:operation soapAction="https://wssba.prismamp.com/INetworkService/GetAgreementRH" style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetCuilState">
+			<soap12:operation soapAction="https://wssba.prismamp.com/INetworkService/GetCuilState" style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetEnrollResult">
+			<soap12:operation soapAction="https://wssba.prismamp.com/INetworkService/GetEnrollResult" style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="Monitor1">
+			<soap12:operation soapAction="https://wssba.prismamp.com/INetworkService/Monitor1" style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="Monitor2">
+			<soap12:operation soapAction="https://wssba.prismamp.com/INetworkService/Monitor2" style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="PaymentDateQuery">
+			<soap12:operation soapAction="https://wssba.prismamp.com/INetworkService/PaymentDateQuery" style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="Test">
+			<soap12:operation soapAction="https://wssba.prismamp.com/INetworkService/Test" style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="Verify">
+			<soap12:operation soapAction="https://wssba.prismamp.com/INetworkService/Verify" style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="Service">
+		<wsdl:port name="WSHttpBinding_INetworkService" binding="tns:WSHttpBinding_INetworkService">
+			<soap12:address location="https://wssba.prismamp.com/NetworkService/Service.svc" />
+			<wsa10:EndpointReference>
+				<wsa10:Address>
+					https://wssba.prismamp.com/NetworkService/Service.svc
+				</wsa10:Address>
+			</wsa10:EndpointReference>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>
