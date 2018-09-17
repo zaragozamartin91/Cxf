@@ -21,7 +21,8 @@ public class BookRepoClient {
 		QName portName = new QName("http://ws.ex.mz/", "BookRepoPort");
 
 		Service service = Service.create(serviceName);
-		service.addPort(portName, SOAPBinding.SOAP11HTTP_BINDING, "http://localhost:8080/CxfMaven-0.0.1-SNAPSHOT/BookRepo");
+//		service.addPort(portName, SOAPBinding.SOAP11HTTP_BINDING, "http://localhost:8080/CxfMaven-0.0.1-SNAPSHOT/BookRepo");
+		service.addPort(portName, SOAPBinding.SOAP11HTTP_BINDING, "http://localhost:8080/CxfMaven-0.0.1/BookRepo");
 		mz.ex.ws.BookRepo client = service.getPort(portName, mz.ex.ws.BookRepo.class);
 
 		BookRequest bookRequest = new BookRequest();

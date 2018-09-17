@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/CxfMaven.iml" filepath="$PROJECT_DIR$/CxfMaven.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../CxfMavenSsl/CxfMavenSsl.iml" filepath="$PROJECT_DIR$/../CxfMavenSsl/CxfMavenSsl.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../javaMisc/httpclient/httpclient.iml" filepath="$PROJECT_DIR$/../../javaMisc/httpclient/httpclient.iml" />
+    </modules>
+  </component>
+</project>
